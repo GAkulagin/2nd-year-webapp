@@ -1,0 +1,162 @@
+﻿@model SUARweb.Apartment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление квартиры</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Здание
+        </dt>
+
+        <dd>
+            <p>
+                @Model.Building.GetAdress()
+            </p>
+        </dd>
+
+        <dt>
+            Арендодатель
+        </dt>
+
+        <dd>
+            @Model.Client.GetPassportAndFullname()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rental_Status.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rental_Status.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LivingArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LivingArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fridge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fridge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stove)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stove)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WashMachine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WashMachine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirConditioner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirConditioner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WithPets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WithPets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WithChildren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WithChildren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForEvents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForEvents)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balcony_Type.BalconyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balcony_Type.BalconyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Internet_Conn.ConnectionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Internet_Conn.ConnectionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Television.TVtype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Television.TVtype)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Apartments")';" />
+        </div>
+    }
+</div>

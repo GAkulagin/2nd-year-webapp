@@ -1,0 +1,1378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Suar.Models" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agreement_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Agreements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="PayFrequencyId" Type="int" Nullable="false" />
+          <Property Name="PaySum" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RenterId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Apartments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="RoomCount" Type="int" Nullable="false" />
+          <Property Name="TotalArea" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LivingArea" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalconyTypeId" Type="int" Nullable="false" />
+          <Property Name="Fridge" Type="bit" Nullable="false" />
+          <Property Name="Stove" Type="bit" Nullable="false" />
+          <Property Name="WashMachine" Type="bit" Nullable="false" />
+          <Property Name="AirConditioner" Type="bit" Nullable="false" />
+          <Property Name="InternetConnTypeId" Type="int" Nullable="false" />
+          <Property Name="TvTypeId" Type="int" Nullable="false" />
+          <Property Name="WithPets" Type="bit" Nullable="false" />
+          <Property Name="WithChildren" Type="bit" Nullable="false" />
+          <Property Name="ForEvents" Type="bit" Nullable="false" />
+          <Property Name="BuildingId" Type="int" Nullable="false" />
+          <Property Name="LessorId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Balcony_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BalconyType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Litera" Type="nvarchar(max)" />
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="PlanningTypeId" Type="int" Nullable="false" />
+          <Property Name="ConstructionTypeId" Type="int" Nullable="false" />
+          <Property Name="BuildYear" Type="int" Nullable="false" />
+          <Property Name="OverhaulYear" Type="int" />
+          <Property Name="FloorCount" Type="int" Nullable="false" />
+          <Property Name="Concierge" Type="bit" Nullable="false" />
+          <Property Name="Domofon" Type="bit" Nullable="false" />
+          <Property Name="Fence" Type="bit" Nullable="false" />
+          <Property Name="UndegroundParking" Type="bit" Nullable="false" />
+          <Property Name="Playground" Type="bit" Nullable="false" />
+          <Property Name="Elevator" Type="bit" Nullable="false" />
+          <Property Name="HeatingTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar(max)" />
+          <Property Name="RegistrationAddress" Type="nvarchar(max)" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="Citizenship" Type="nvarchar(max)" />
+          <Property Name="UFMScode" Type="nvarchar(max)" />
+          <Property Name="PassportDate" Type="datetime" Nullable="false" />
+          <Property Name="INN" Type="nvarchar(max)" />
+          <Property Name="KPP" Type="nvarchar(max)" />
+          <Property Name="BIK" Type="nvarchar(max)" />
+          <Property Name="BankAccount" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Construction_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstructionType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Districts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettlementId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Heating_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HeatingType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Internet_Conn">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConnectionType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Pay_Frequency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Frequency" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DateAndTime" Type="datetime" Nullable="false" />
+          <Property Name="AgreementId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Planning_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanningType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Rental_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Settlement_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Settlements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Televisions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TVtype" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Agreements_dbo_Agreement_Status_StatusId">
+          <End Role="Agreement_Status" Type="Self.Agreement_Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Apartments_ApartmentId">
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="ApartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Clients_RenterId">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="PassportID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId">
+          <End Role="Pay_Frequency" Type="Self.Pay_Frequency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay_Frequency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="PayFrequencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId">
+          <End Role="Balcony_Type" Type="Self.Balcony_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balcony_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BalconyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Buildings_BuildingId">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Clients_LessorId">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="PassportID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="LessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId">
+          <End Role="Internet_Conn" Type="Self.Internet_Conn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Internet_Conn">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="InternetConnTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Rental_Status_StatusId">
+          <End Role="Rental_Status" Type="Self.Rental_Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rental_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Televisions_TvTypeId">
+          <End Role="Televisions" Type="Self.Televisions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Televisions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="TvTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId">
+          <End Role="Construction_Type" Type="Self.Construction_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Construction_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ConstructionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Districts_DistrictId">
+          <End Role="Districts" Type="Self.Districts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId">
+          <End Role="Heating_Type" Type="Self.Heating_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heating_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="HeatingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId">
+          <End Role="Planning_Type" Type="Self.Planning_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="PlanningTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Clients_dbo_Genders_GenderId">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Districts_dbo_Settlements_SettlementId">
+          <End Role="Settlements" Type="Self.Settlements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settlements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="SettlementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Agreements_AgreementId">
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="AgreementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Settlements_dbo_Settlement_Type_TypeId">
+          <End Role="Settlement_Type" Type="Self.Settlement_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Settlements" Type="Self.Settlements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settlement_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlements">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Settlements_dbo_Subjects_SubjectId">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Settlements" Type="Self.Settlements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlements">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SuarModelsContainer">
+          <EntitySet Name="Agreement_Status" EntityType="Self.Agreement_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Agreements" EntityType="Self.Agreements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apartments" EntityType="Self.Apartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Balcony_Type" EntityType="Self.Balcony_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Construction_Type" EntityType="Self.Construction_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Heating_Type" EntityType="Self.Heating_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Internet_Conn" EntityType="Self.Internet_Conn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay_Frequency" EntityType="Self.Pay_Frequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planning_Type" EntityType="Self.Planning_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rental_Status" EntityType="Self.Rental_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settlement_Type" EntityType="Self.Settlement_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settlements" EntityType="Self.Settlements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Televisions" EntityType="Self.Televisions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Agreement_Status_StatusId" Association="Self.FK_dbo_Agreements_dbo_Agreement_Status_StatusId">
+            <End Role="Agreement_Status" EntitySet="Agreement_Status" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Apartments_ApartmentId" Association="Self.FK_dbo_Agreements_dbo_Apartments_ApartmentId">
+            <End Role="Apartments" EntitySet="Apartments" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Clients_RenterId" Association="Self.FK_dbo_Agreements_dbo_Clients_RenterId">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId" Association="Self.FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId">
+            <End Role="Pay_Frequency" EntitySet="Pay_Frequency" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId" Association="Self.FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId">
+            <End Role="Balcony_Type" EntitySet="Balcony_Type" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Buildings_BuildingId" Association="Self.FK_dbo_Apartments_dbo_Buildings_BuildingId">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Clients_LessorId" Association="Self.FK_dbo_Apartments_dbo_Clients_LessorId">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId" Association="Self.FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId">
+            <End Role="Internet_Conn" EntitySet="Internet_Conn" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Rental_Status_StatusId" Association="Self.FK_dbo_Apartments_dbo_Rental_Status_StatusId">
+            <End Role="Rental_Status" EntitySet="Rental_Status" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Televisions_TvTypeId" Association="Self.FK_dbo_Apartments_dbo_Televisions_TvTypeId">
+            <End Role="Televisions" EntitySet="Televisions" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId" Association="Self.FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId">
+            <End Role="Construction_Type" EntitySet="Construction_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Districts_DistrictId" Association="Self.FK_dbo_Buildings_dbo_Districts_DistrictId">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId" Association="Self.FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId">
+            <End Role="Heating_Type" EntitySet="Heating_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId" Association="Self.FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId">
+            <End Role="Planning_Type" EntitySet="Planning_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Clients_dbo_Genders_GenderId" Association="Self.FK_dbo_Clients_dbo_Genders_GenderId">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Districts_dbo_Settlements_SettlementId" Association="Self.FK_dbo_Districts_dbo_Settlements_SettlementId">
+            <End Role="Settlements" EntitySet="Settlements" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Agreements_AgreementId" Association="Self.FK_dbo_Payments_dbo_Agreements_AgreementId">
+            <End Role="Agreements" EntitySet="Agreements" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Settlements_dbo_Settlement_Type_TypeId" Association="Self.FK_dbo_Settlements_dbo_Settlement_Type_TypeId">
+            <End Role="Settlement_Type" EntitySet="Settlement_Type" />
+            <End Role="Settlements" EntitySet="Settlements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Settlements_dbo_Subjects_SubjectId" Association="Self.FK_dbo_Settlements_dbo_Subjects_SubjectId">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Settlements" EntitySet="Settlements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Suar.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agreement_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreements" Relationship="Self.FK_dbo_Agreements_dbo_Agreement_Status_StatusId" FromRole="Agreement_Status" ToRole="Agreements" />
+        </EntityType>
+        <EntityType Name="Agreement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PayFrequencyId" Type="Int32" Nullable="false" />
+          <Property Name="PaySum" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RenterId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agreement_Status" Relationship="Self.FK_dbo_Agreements_dbo_Agreement_Status_StatusId" FromRole="Agreements" ToRole="Agreement_Status" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_dbo_Agreements_dbo_Apartments_ApartmentId" FromRole="Agreements" ToRole="Apartments" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Agreements_dbo_Clients_RenterId" FromRole="Agreements" ToRole="Clients" />
+          <NavigationProperty Name="Pay_Frequency" Relationship="Self.FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId" FromRole="Agreements" ToRole="Pay_Frequency" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_Agreements_AgreementId" FromRole="Agreements" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="RoomCount" Type="Int32" Nullable="false" />
+          <Property Name="TotalArea" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LivingArea" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BalconyTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Fridge" Type="Boolean" Nullable="false" />
+          <Property Name="Stove" Type="Boolean" Nullable="false" />
+          <Property Name="WashMachine" Type="Boolean" Nullable="false" />
+          <Property Name="AirConditioner" Type="Boolean" Nullable="false" />
+          <Property Name="InternetConnTypeId" Type="Int32" Nullable="false" />
+          <Property Name="TvTypeId" Type="Int32" Nullable="false" />
+          <Property Name="WithPets" Type="Boolean" Nullable="false" />
+          <Property Name="WithChildren" Type="Boolean" Nullable="false" />
+          <Property Name="ForEvents" Type="Boolean" Nullable="false" />
+          <Property Name="BuildingId" Type="Int32" Nullable="false" />
+          <Property Name="LessorId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreements" Relationship="Self.FK_dbo_Agreements_dbo_Apartments_ApartmentId" FromRole="Apartments" ToRole="Agreements" />
+          <NavigationProperty Name="Balcony_Type" Relationship="Self.FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId" FromRole="Apartments" ToRole="Balcony_Type" />
+          <NavigationProperty Name="Building" Relationship="Self.FK_dbo_Apartments_dbo_Buildings_BuildingId" FromRole="Apartments" ToRole="Buildings" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Apartments_dbo_Clients_LessorId" FromRole="Apartments" ToRole="Clients" />
+          <NavigationProperty Name="Internet_Conn" Relationship="Self.FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId" FromRole="Apartments" ToRole="Internet_Conn" />
+          <NavigationProperty Name="Rental_Status" Relationship="Self.FK_dbo_Apartments_dbo_Rental_Status_StatusId" FromRole="Apartments" ToRole="Rental_Status" />
+          <NavigationProperty Name="Television" Relationship="Self.FK_dbo_Apartments_dbo_Televisions_TvTypeId" FromRole="Apartments" ToRole="Televisions" />
+        </EntityType>
+        <EntityType Name="Balcony_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BalconyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId" FromRole="Balcony_Type" ToRole="Apartments" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Litera" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="PlanningTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ConstructionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BuildYear" Type="Int32" Nullable="false" />
+          <Property Name="OverhaulYear" Type="Int32" />
+          <Property Name="FloorCount" Type="Int32" Nullable="false" />
+          <Property Name="Concierge" Type="Boolean" Nullable="false" />
+          <Property Name="Domofon" Type="Boolean" Nullable="false" />
+          <Property Name="Fence" Type="Boolean" Nullable="false" />
+          <Property Name="UndegroundParking" Type="Boolean" Nullable="false" />
+          <Property Name="Playground" Type="Boolean" Nullable="false" />
+          <Property Name="Elevator" Type="Boolean" Nullable="false" />
+          <Property Name="HeatingTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Buildings_BuildingId" FromRole="Buildings" ToRole="Apartments" />
+          <NavigationProperty Name="Construction_Type" Relationship="Self.FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId" FromRole="Buildings" ToRole="Construction_Type" />
+          <NavigationProperty Name="District" Relationship="Self.FK_dbo_Buildings_dbo_Districts_DistrictId" FromRole="Buildings" ToRole="Districts" />
+          <NavigationProperty Name="Heating_Type" Relationship="Self.FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId" FromRole="Buildings" ToRole="Heating_Type" />
+          <NavigationProperty Name="Planning_Type" Relationship="Self.FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId" FromRole="Buildings" ToRole="Planning_Type" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="Citizenship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UFMScode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PassportDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="INN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KPP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BIK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreements" Relationship="Self.FK_dbo_Agreements_dbo_Clients_RenterId" FromRole="Clients" ToRole="Agreements" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Clients_LessorId" FromRole="Clients" ToRole="Apartments" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_dbo_Clients_dbo_Genders_GenderId" FromRole="Clients" ToRole="Genders" />
+        </EntityType>
+        <EntityType Name="Construction_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstructionType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId" FromRole="Construction_Type" ToRole="Buildings" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettlementId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_dbo_Buildings_dbo_Districts_DistrictId" FromRole="Districts" ToRole="Buildings" />
+          <NavigationProperty Name="Settlement" Relationship="Self.FK_dbo_Districts_dbo_Settlements_SettlementId" FromRole="Districts" ToRole="Settlements" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Clients_dbo_Genders_GenderId" FromRole="Genders" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Heating_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HeatingType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId" FromRole="Heating_Type" ToRole="Buildings" />
+        </EntityType>
+        <EntityType Name="Internet_Conn">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId" FromRole="Internet_Conn" ToRole="Apartments" />
+        </EntityType>
+        <EntityType Name="Pay_Frequency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Frequency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agreements" Relationship="Self.FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId" FromRole="Pay_Frequency" ToRole="Agreements" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sum" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AgreementId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agreement" Relationship="Self.FK_dbo_Payments_dbo_Agreements_AgreementId" FromRole="Payments" ToRole="Agreements" />
+        </EntityType>
+        <EntityType Name="Planning_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanningType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId" FromRole="Planning_Type" ToRole="Buildings" />
+        </EntityType>
+        <EntityType Name="Rental_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Rental_Status_StatusId" FromRole="Rental_Status" ToRole="Apartments" />
+        </EntityType>
+        <EntityType Name="Settlement_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Settlements" Relationship="Self.FK_dbo_Settlements_dbo_Settlement_Type_TypeId" FromRole="Settlement_Type" ToRole="Settlements" />
+        </EntityType>
+        <EntityType Name="Settlement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_dbo_Districts_dbo_Settlements_SettlementId" FromRole="Settlements" ToRole="Districts" />
+          <NavigationProperty Name="Settlement_Type" Relationship="Self.FK_dbo_Settlements_dbo_Settlement_Type_TypeId" FromRole="Settlements" ToRole="Settlement_Type" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_dbo_Settlements_dbo_Subjects_SubjectId" FromRole="Settlements" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Settlements" Relationship="Self.FK_dbo_Settlements_dbo_Subjects_SubjectId" FromRole="Subjects" ToRole="Settlements" />
+        </EntityType>
+        <EntityType Name="Television">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TVtype" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK_dbo_Apartments_dbo_Televisions_TvTypeId" FromRole="Televisions" ToRole="Apartments" />
+        </EntityType>
+        <Association Name="FK_dbo_Agreements_dbo_Agreement_Status_StatusId">
+          <End Role="Agreement_Status" Type="Self.Agreement_Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreement_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Apartments_ApartmentId">
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="ApartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Clients_RenterId">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="PassportID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="RenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId">
+          <End Role="Pay_Frequency" Type="Self.Pay_Frequency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay_Frequency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="PayFrequencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Agreements_AgreementId">
+          <End Role="Agreements" Type="Self.Agreement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agreements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="AgreementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId">
+          <End Role="Balcony_Type" Type="Self.Balcony_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balcony_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BalconyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Buildings_BuildingId">
+          <End Role="Buildings" Type="Self.Building" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Clients_LessorId">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="PassportID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="LessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId">
+          <End Role="Internet_Conn" Type="Self.Internet_Conn" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Internet_Conn">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="InternetConnTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Rental_Status_StatusId">
+          <End Role="Rental_Status" Type="Self.Rental_Status" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rental_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Apartments_dbo_Televisions_TvTypeId">
+          <End Role="Televisions" Type="Self.Television" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Televisions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="TvTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId">
+          <End Role="Construction_Type" Type="Self.Construction_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Construction_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ConstructionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Districts_DistrictId">
+          <End Role="Districts" Type="Self.District" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId">
+          <End Role="Heating_Type" Type="Self.Heating_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heating_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="HeatingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId">
+          <End Role="Planning_Type" Type="Self.Planning_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Buildings" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="PlanningTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Clients_dbo_Genders_GenderId">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Districts_dbo_Settlements_SettlementId">
+          <End Role="Settlements" Type="Self.Settlement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Districts" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settlements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="SettlementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Settlements_dbo_Settlement_Type_TypeId">
+          <End Role="Settlement_Type" Type="Self.Settlement_Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Settlements" Type="Self.Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settlement_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlements">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Settlements_dbo_Subjects_SubjectId">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Settlements" Type="Self.Settlement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settlements">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SuarDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agreement_Status" EntityType="Self.Agreement_Status" />
+          <EntitySet Name="Agreements" EntityType="Self.Agreement" />
+          <EntitySet Name="Apartments" EntityType="Self.Apartment" />
+          <EntitySet Name="Balcony_Type" EntityType="Self.Balcony_Type" />
+          <EntitySet Name="Buildings" EntityType="Self.Building" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Construction_Type" EntityType="Self.Construction_Type" />
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Heating_Type" EntityType="Self.Heating_Type" />
+          <EntitySet Name="Internet_Conn" EntityType="Self.Internet_Conn" />
+          <EntitySet Name="Pay_Frequency" EntityType="Self.Pay_Frequency" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Planning_Type" EntityType="Self.Planning_Type" />
+          <EntitySet Name="Rental_Status" EntityType="Self.Rental_Status" />
+          <EntitySet Name="Settlement_Type" EntityType="Self.Settlement_Type" />
+          <EntitySet Name="Settlements" EntityType="Self.Settlement" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Televisions" EntityType="Self.Television" />
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Agreement_Status_StatusId" Association="Self.FK_dbo_Agreements_dbo_Agreement_Status_StatusId">
+            <End Role="Agreement_Status" EntitySet="Agreement_Status" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Apartments_ApartmentId" Association="Self.FK_dbo_Agreements_dbo_Apartments_ApartmentId">
+            <End Role="Apartments" EntitySet="Apartments" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Clients_RenterId" Association="Self.FK_dbo_Agreements_dbo_Clients_RenterId">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId" Association="Self.FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId">
+            <End Role="Pay_Frequency" EntitySet="Pay_Frequency" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Agreements_AgreementId" Association="Self.FK_dbo_Payments_dbo_Agreements_AgreementId">
+            <End Role="Agreements" EntitySet="Agreements" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId" Association="Self.FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId">
+            <End Role="Balcony_Type" EntitySet="Balcony_Type" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Buildings_BuildingId" Association="Self.FK_dbo_Apartments_dbo_Buildings_BuildingId">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Clients_LessorId" Association="Self.FK_dbo_Apartments_dbo_Clients_LessorId">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId" Association="Self.FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId">
+            <End Role="Internet_Conn" EntitySet="Internet_Conn" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Rental_Status_StatusId" Association="Self.FK_dbo_Apartments_dbo_Rental_Status_StatusId">
+            <End Role="Rental_Status" EntitySet="Rental_Status" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Apartments_dbo_Televisions_TvTypeId" Association="Self.FK_dbo_Apartments_dbo_Televisions_TvTypeId">
+            <End Role="Televisions" EntitySet="Televisions" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId" Association="Self.FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId">
+            <End Role="Construction_Type" EntitySet="Construction_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Districts_DistrictId" Association="Self.FK_dbo_Buildings_dbo_Districts_DistrictId">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId" Association="Self.FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId">
+            <End Role="Heating_Type" EntitySet="Heating_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId" Association="Self.FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId">
+            <End Role="Planning_Type" EntitySet="Planning_Type" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Clients_dbo_Genders_GenderId" Association="Self.FK_dbo_Clients_dbo_Genders_GenderId">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Districts_dbo_Settlements_SettlementId" Association="Self.FK_dbo_Districts_dbo_Settlements_SettlementId">
+            <End Role="Settlements" EntitySet="Settlements" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Settlements_dbo_Settlement_Type_TypeId" Association="Self.FK_dbo_Settlements_dbo_Settlement_Type_TypeId">
+            <End Role="Settlement_Type" EntitySet="Settlement_Type" />
+            <End Role="Settlements" EntitySet="Settlements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Settlements_dbo_Subjects_SubjectId" Association="Self.FK_dbo_Settlements_dbo_Subjects_SubjectId">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Settlements" EntitySet="Settlements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SuarModelsContainer" CdmEntityContainer="SuarDbContext">
+          <EntitySetMapping Name="Agreement_Status">
+            <EntityTypeMapping TypeName="Suar.Models.Agreement_Status">
+              <MappingFragment StoreEntitySet="Agreement_Status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agreements">
+            <EntityTypeMapping TypeName="Suar.Models.Agreement">
+              <MappingFragment StoreEntitySet="Agreements">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="PayFrequencyId" ColumnName="PayFrequencyId" />
+                <ScalarProperty Name="PaySum" ColumnName="PaySum" />
+                <ScalarProperty Name="RenterId" ColumnName="RenterId" />
+                <ScalarProperty Name="ApartmentId" ColumnName="ApartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apartments">
+            <EntityTypeMapping TypeName="Suar.Models.Apartment">
+              <MappingFragment StoreEntitySet="Apartments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RoomCount" ColumnName="RoomCount" />
+                <ScalarProperty Name="TotalArea" ColumnName="TotalArea" />
+                <ScalarProperty Name="LivingArea" ColumnName="LivingArea" />
+                <ScalarProperty Name="BalconyTypeId" ColumnName="BalconyTypeId" />
+                <ScalarProperty Name="Fridge" ColumnName="Fridge" />
+                <ScalarProperty Name="Stove" ColumnName="Stove" />
+                <ScalarProperty Name="WashMachine" ColumnName="WashMachine" />
+                <ScalarProperty Name="AirConditioner" ColumnName="AirConditioner" />
+                <ScalarProperty Name="InternetConnTypeId" ColumnName="InternetConnTypeId" />
+                <ScalarProperty Name="TvTypeId" ColumnName="TvTypeId" />
+                <ScalarProperty Name="WithPets" ColumnName="WithPets" />
+                <ScalarProperty Name="WithChildren" ColumnName="WithChildren" />
+                <ScalarProperty Name="ForEvents" ColumnName="ForEvents" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="LessorId" ColumnName="LessorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Balcony_Type">
+            <EntityTypeMapping TypeName="Suar.Models.Balcony_Type">
+              <MappingFragment StoreEntitySet="Balcony_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BalconyType" ColumnName="BalconyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="Suar.Models.Building">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Litera" ColumnName="Litera" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="PlanningTypeId" ColumnName="PlanningTypeId" />
+                <ScalarProperty Name="ConstructionTypeId" ColumnName="ConstructionTypeId" />
+                <ScalarProperty Name="BuildYear" ColumnName="BuildYear" />
+                <ScalarProperty Name="OverhaulYear" ColumnName="OverhaulYear" />
+                <ScalarProperty Name="FloorCount" ColumnName="FloorCount" />
+                <ScalarProperty Name="Concierge" ColumnName="Concierge" />
+                <ScalarProperty Name="Domofon" ColumnName="Domofon" />
+                <ScalarProperty Name="Fence" ColumnName="Fence" />
+                <ScalarProperty Name="UndegroundParking" ColumnName="UndegroundParking" />
+                <ScalarProperty Name="Playground" ColumnName="Playground" />
+                <ScalarProperty Name="Elevator" ColumnName="Elevator" />
+                <ScalarProperty Name="HeatingTypeId" ColumnName="HeatingTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="Suar.Models.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="PassportID" ColumnName="PassportID" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="RegistrationAddress" ColumnName="RegistrationAddress" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="UFMScode" ColumnName="UFMScode" />
+                <ScalarProperty Name="PassportDate" ColumnName="PassportDate" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+                <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Construction_Type">
+            <EntityTypeMapping TypeName="Suar.Models.Construction_Type">
+              <MappingFragment StoreEntitySet="Construction_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConstructionType" ColumnName="ConstructionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="Suar.Models.District">
+              <MappingFragment StoreEntitySet="Districts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SettlementId" ColumnName="SettlementId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="Suar.Models.Gender">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Heating_Type">
+            <EntityTypeMapping TypeName="Suar.Models.Heating_Type">
+              <MappingFragment StoreEntitySet="Heating_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HeatingType" ColumnName="HeatingType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Internet_Conn">
+            <EntityTypeMapping TypeName="Suar.Models.Internet_Conn">
+              <MappingFragment StoreEntitySet="Internet_Conn">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConnectionType" ColumnName="ConnectionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pay_Frequency">
+            <EntityTypeMapping TypeName="Suar.Models.Pay_Frequency">
+              <MappingFragment StoreEntitySet="Pay_Frequency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Suar.Models.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="AgreementId" ColumnName="AgreementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planning_Type">
+            <EntityTypeMapping TypeName="Suar.Models.Planning_Type">
+              <MappingFragment StoreEntitySet="Planning_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PlanningType" ColumnName="PlanningType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rental_Status">
+            <EntityTypeMapping TypeName="Suar.Models.Rental_Status">
+              <MappingFragment StoreEntitySet="Rental_Status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settlement_Type">
+            <EntityTypeMapping TypeName="Suar.Models.Settlement_Type">
+              <MappingFragment StoreEntitySet="Settlement_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settlements">
+            <EntityTypeMapping TypeName="Suar.Models.Settlement">
+              <MappingFragment StoreEntitySet="Settlements">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Suar.Models.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Televisions">
+            <EntityTypeMapping TypeName="Suar.Models.Television">
+              <MappingFragment StoreEntitySet="Televisions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TVtype" ColumnName="TVtype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SUARweb.Settlement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Просмотр данных о населенных пунктах</h2>
+
+<p>
+    <input type="button" value="Добавить" onclick="window.location.href='@Url.Action("Create", "Settlements")';" />
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "Settlements")';" />
+</p>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Субъект РФ: </label>
+        @Html.TextBox("subject")
+        <label class="control-label">Нас. пункт: </label>
+        @Html.TextBox("settlement")
+
+        <input type="submit" value="Фильтр" />
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Subject.Name)
+        </th>
+
+        <th>
+            <p>Список районов</p>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Settlement_Type.Type @item.Name
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.Name)
+        </td>
+
+        <td>
+            @foreach(var district in item.Districts)
+                {
+                    <p>@district.Name</p>
+                }
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+</p>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9150ca7a8a0b4c7d8b9c7c48b031f974" Name="Diagram1">
+        <EntityTypeShape EntityType="Suar.Models.Agreement_Status" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Agreement" Width="1.5" PointX="12" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Apartment" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Balcony_Type" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Building" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Client" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Construction_Type" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.District" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Gender" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Heating_Type" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Internet_Conn" Width="1.5" PointX="7.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Pay_Frequency" Width="1.5" PointX="9.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Payment" Width="1.5" PointX="14.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Planning_Type" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Rental_Status" Width="1.5" PointX="7.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Settlement_Type" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Settlement" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Subject" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Suar.Models.Television" Width="1.5" PointX="7.5" PointY="22.375" IsExpanded="true" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Agreements_dbo_Agreement_Status_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Agreements_dbo_Apartments_ApartmentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Agreements_dbo_Clients_RenterId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Agreements_dbo_Pay_Frequency_PayFrequencyId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Payments_dbo_Agreements_AgreementId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Balcony_Type_BalconyTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Buildings_BuildingId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Clients_LessorId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Internet_Conn_InternetConnTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Rental_Status_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Apartments_dbo_Televisions_TvTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Buildings_dbo_Construction_Type_ConstructionTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Buildings_dbo_Districts_DistrictId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Buildings_dbo_Heating_Type_HeatingTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Buildings_dbo_Planning_Type_PlanningTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Clients_dbo_Genders_GenderId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Districts_dbo_Settlements_SettlementId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Settlements_dbo_Settlement_Type_TypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Suar.Models.FK_dbo_Settlements_dbo_Subjects_SubjectId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

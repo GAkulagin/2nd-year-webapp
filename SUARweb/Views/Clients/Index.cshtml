@@ -1,0 +1,149 @@
+﻿@model IEnumerable<SUARweb.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Просмотр данных о клиентах</h2>
+
+<p>
+    <input type="button" value="Добавить" onclick="window.location.href='@Url.Action("Create", "Clients")';" />
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "Clients")';" />
+</p>
+<div>
+    @using (Html.BeginForm("ExportToExcel", "Clients", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+        <div>
+            <input type="submit" value="Экспорт в Excel" />
+        </div>
+    }
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Серия и номер паспорта: </label>
+        @Html.TextBox("passport")
+        <label class="control-label">ФИО: </label>
+        @Html.TextBox("fullname")
+        <label class="control-label">Телефон: </label>
+        @Html.TextBox("phone")
+        <p></p>
+        <label class="control-label">ИНН: </label>
+        @Html.TextBox("inn")
+        <label class="control-label">КПП: </label>
+        @Html.TextBox("kpp")
+        <label class="control-label">БИК: </label>
+        @Html.TextBox("bik")
+        <label class="control-label">Расчетный счет: </label>
+        @Html.TextBox("bankacc")
+
+        <input type="submit" value="Фильтр"/>
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Citizenship)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassportID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassportDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UFMScode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KPP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                <p>@item.Birthdate.ToString("d")</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Citizenship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassportID)
+            </td>
+            <td>
+                <p>@item.PassportDate.ToString("d")</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UFMScode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.INN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KPP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+                <input type="button" value="Изменить" onclick="window.location.href='@Url.Action("Edit", "Clients", new { id = item.PassportID })';" />
+                <p></p>
+                <input type="button" value=" Удалить " onclick="window.location.href='@Url.Action("Delete", "Clients", new { id = item.PassportID })';" />
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+</p>

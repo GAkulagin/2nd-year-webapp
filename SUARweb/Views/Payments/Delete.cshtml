@@ -1,0 +1,60 @@
+﻿@model SUARweb.Payment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление платежа</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AgreementId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgreementId)
+        </dd>
+        <dt>
+            Плательщик (арендатор)
+        </dt>
+
+        <dd>
+            @Model.Agreement.Client.GetPassportAndFullname()
+        </dd>
+        <dt>
+            Получатель (арендодатель)
+        </dt>
+
+        <dd>
+            @Model.Agreement.Apartment.Client.GetPassportAndFullname()
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAndTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Payments")';" />
+        </div>
+    }
+</div>

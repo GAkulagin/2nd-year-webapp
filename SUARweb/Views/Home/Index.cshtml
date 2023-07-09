@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    <h2>СУАР</h2>
+    <h3>Система учета арендаторов жилых помещений</h3>
+</div>
+
+
+<div class="row">
+    <h3>Работа с клиентами</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Clients")';" />
+        <input type="button" value="Добавить клиента" onclick="window.location.href='@Url.Action("Create", "Clients")';" />
+        <input type="button" value="Задолженности арендаторов" onclick="window.location.href='@Url.Action("Index", "RentersDebts")';" />
+    </p>
+</div>
+<div class="row">
+    <h3>Работа со зданиями</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Buildings")';" />
+        <input type="button" value="Добавить здание" onclick="window.location.href='@Url.Action("Create", "Buildings")';" />
+    </p>
+</div>
+<div class="row">
+    <h3>Работа с квартирами</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Apartments")';" />
+        <input type="button" value="Добавить квартиру" onclick="window.location.href='@Url.Action("Create", "Apartments")';" />
+    </p>
+</div>
+<div class="row">
+    <h3>Работа с договорами аренды</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Agreements")';" />
+        <input type="button" value="Добавить договор" onclick="window.location.href='@Url.Action("Create", "Agreements")';" />
+    </p>
+</div>
+<div class="row">
+    <h3>Работа с арендными платежами</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Payments")';" />
+    </p>
+</div>
+<div class="row">
+    <h3>Работа с населенными пунктами</h3>
+    <p>
+        <input type="button" value="Просмотр данных" onclick="window.location.href='@Url.Action("Index", "Settlements")';" />
+        <input type="button" value="Добавить населенный пункт" onclick="window.location.href='@Url.Action("Create", "Settlements")';" />
+    </p>
+</div>

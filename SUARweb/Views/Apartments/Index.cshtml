@@ -1,0 +1,160 @@
+﻿@model IEnumerable<SUARweb.Apartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Просмотр данных о квартирах</h2>
+
+<p>
+    <input type="button" value="Добавить" onclick="window.location.href='@Url.Action("Create", "Apartments")';" />
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "Apartments")';" />
+</p>
+
+<div>
+    @using (Html.BeginForm("ExportToExcel", "Apartments", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+        <div>
+            <input type="submit" value="Экспорт в Excel" />
+            <p></p>
+        </div>
+    }
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Статус: </label>
+        @Html.DropDownList("status", ViewBag.StatusTypes as SelectList)
+        <label class="control-label">Здание: </label>
+        @Html.TextBox("adress")
+        <label class="control-label">Арендодатель: </label>
+        @Html.TextBox("lessor")
+        <label class="control-label">Число комнат: </label>
+        <input type="number" name="roomCount" />
+
+        <input type="submit" value="Фильтр" />
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            <p>Адрес здания</p>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            <p>Арендодатель</p>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rental_Status.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LivingArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fridge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stove)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WashMachine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirConditioner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WithPets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WithChildren)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForEvents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balcony_Type.BalconyType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Internet_Conn.ConnectionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Television.TVtype)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Building.GetAdress()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @item.Client.GetPassportAndFullname()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rental_Status.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalArea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LivingArea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fridge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stove)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WashMachine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AirConditioner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WithPets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WithChildren)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForEvents)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balcony_Type.BalconyType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Internet_Conn.ConnectionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Television.TVtype)
+        </td>
+        <td>
+            <input type="button" value="Изменить" onclick="window.location.href='@Url.Action("Edit", "Apartments", new { id = item.ID })';" />
+            <p></p>
+            <input type="button" value=" Удалить " onclick="window.location.href='@Url.Action("Delete", "Apartments", new { id = item.ID })';" />
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+</p>

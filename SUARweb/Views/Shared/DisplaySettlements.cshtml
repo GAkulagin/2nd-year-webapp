@@ -1,0 +1,11 @@
+﻿@model SUARweb.Settlement
+
+<option value="">Выберите населенный пункт</option>
+
+@if(ViewBag.Settlement != null)
+            {
+                foreach(var item in ViewBag.Settlement)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }

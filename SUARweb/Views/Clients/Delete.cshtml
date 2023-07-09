@@ -1,0 +1,134 @@
+﻿@model SUARweb.Client
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление клиента</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fullname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </dt>
+
+        <dd>
+            <p>@Model.Birthdate.ToString("d")</p>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Citizenship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Citizenship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassportID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassportDate)
+        </dt>
+
+        <dd>
+            <p>@Model.PassportDate.ToString("d")</p>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UFMScode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UFMScode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KPP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KPP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Clients")';" />
+        </div>
+    }
+</div>

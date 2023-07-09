@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SUARweb.Payment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Просмотр данных о платежах</h2>
+
+<p>
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "Payments")';" />
+</p>
+
+<div>
+    @using (Html.BeginForm("ExportToExcel", "Payments", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+        <div>
+            <input type="submit" value="Экспорт в Excel" />
+            <p></p>
+        </div>
+    }
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Плательщик: </label>
+        @Html.TextBox("renter")
+        <label class="control-label">Получатель: </label>
+        @Html.TextBox("lessor")
+        <label class="control-label">Код договора: </label>
+        <input type="number" name="agreement" />
+
+        <input type="submit" value="Фильтр" />
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgreementId)
+        </th>
+        <th>
+            <p>Плательщик (арендатор)</p>
+        </th>
+        <th>
+            <p>Получатель (арендодатель)</p>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAndTime)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgreementId)
+        </td>
+        <td>
+            @item.Agreement.Client.GetPassportAndFullname()
+        </td>
+        <td>
+            @item.Agreement.Apartment.Client.GetPassportAndFullname()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAndTime)
+        </td>
+        <td>
+            <input type="button" value="Удалить" onclick="window.location.href='@Url.Action("Delete", "Payments", new { id = item.ID })';" />
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+    <input type="button" value="Договоры аренды" onclick="window.location.href='@Url.Action("Index", "Agreements")';" />
+</p>

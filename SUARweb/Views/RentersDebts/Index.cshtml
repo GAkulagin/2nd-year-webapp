@@ -1,0 +1,121 @@
+﻿@model IEnumerable<SUARweb.Models.RentersDebts>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Отчет о задолженностях арендаторов</h2>
+
+<p>
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "RentersDebts")';" />
+</p>
+
+<div>
+    @using (Html.BeginForm("ExportToExcel", "RentersDebts", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+        <div>
+            <input type="submit" value="Экспорт в Excel" />
+            <p></p>
+        </div>
+    }
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Арендатор: </label>
+        @Html.TextBox("renter")
+        <label class="control-label">Код договора: </label>
+        <input type="number" name="agr" />
+        <p></p>
+
+        <label class="control-label">Сортировка по датам </label>
+        @Html.DropDownList("dateSort", ViewBag.DataSortTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">С: </label>
+        <!--Эти элементы возвращают строки!-->
+        <input type="datetime" name="firstDate" />
+        <label class="control-label">По: </label>
+        <input type="datetime" name="secondDate" />
+        <p></p>
+
+        <label class="control-label">Сортировка по размеру задолженности </label>
+        <p></p>
+        <label class="control-label">От: </label>
+        <input type="number" name="minSum" />
+        <label class="control-label">До: </label>
+        <input type="number" name="maxSum" />
+
+        <input type="submit" value="Фильтр" />
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgreementId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Renter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayFrequency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaySum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HaveToPay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Difference)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgreementId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Renter)
+            </td>
+           <td>
+                @item.StartDate.ToString("d")
+            </td>
+            <td>
+                @item.EndDate.ToString("d")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayFrequency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaySum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaveToPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Difference)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+</p>
+

@@ -1,0 +1,46 @@
+﻿@model SUARweb.Agreement
+
+@{
+    ViewBag.Title = "Prolong";
+}
+
+<h2>Продление договора аренды</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Текущая дата окончания </label>
+            <div class="col-md-10">
+                <label class="control-label">@Model.EndDate.ToString("d") </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, "Новая дата окончания", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.EndDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @type = "date", min = Model.EndDate})
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Agreements")';" />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

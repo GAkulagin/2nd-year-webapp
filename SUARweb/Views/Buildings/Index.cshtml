@@ -1,0 +1,174 @@
+﻿@model IEnumerable<SUARweb.Building>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Просмотр данных о зданиях</h2>
+
+<p>
+    <input type="button" value="Добавить" onclick="window.location.href='@Url.Action("Create", "Buildings")';" />
+    <input type="button" value="Сброс фильтров" onclick="window.location.href='@Url.Action("Index", "Buildings")';" />
+</p>
+
+<div>
+    @using (Html.BeginForm("ExportToExcel", "Buildings", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+    {
+        <div>
+            <input type="submit" value="Экспорт в Excel" />
+            <p></p>
+        </div>
+    }
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Субъект РФ: </label>
+        @Html.TextBox("subject")
+        <label class="control-label">Населенный пункт: </label>
+        @Html.TextBox("settlement")
+        <label class="control-label">Район: </label>
+        @Html.TextBox("district")
+        <label class="control-label">Улица: </label>
+        @Html.TextBox("street")
+        <p></p>
+        <label class="control-label">Годы постройки: </label>
+        <p></p>
+        <label class="control-label">С: </label>
+        <input type="number" name="firstYear" />
+        <label class="control-label">По: </label>
+        <input type="number" name="secondYear" />
+
+        <input type="submit" value="Фильтр" />
+        <p></p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.District.Settlement.Subject.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.District.Settlement.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.District.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Litera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OverhaulYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FloorCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Construction_Type.ConstructionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Heating_Type.HeatingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Planning_Type.PlanningType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Concierge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Domofon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UndegroundParking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Playground)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Elevator)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.District.Settlement.Subject.Name)
+        </td>
+        <td>
+            <p>@item.District.Settlement.Settlement_Type.Type @item.District.Settlement.Name</p>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.District.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Litera)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OverhaulYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FloorCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Construction_Type.ConstructionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Heating_Type.HeatingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Planning_Type.PlanningType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Concierge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Domofon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UndegroundParking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Playground)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Elevator)
+        </td>
+        <td>
+            <input type="button" value="Изменить" onclick="window.location.href='@Url.Action("Edit", "Buildings", new { id = item.ID })';" />
+            <p></p>
+            <input type="button" value=" Удалить " onclick="window.location.href='@Url.Action("Delete", "Buildings", new { id = item.ID })';" />
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    <input type="button" value="Главное меню" onclick="window.location.href='@Url.Action("Index", "Home")';" />
+</p>

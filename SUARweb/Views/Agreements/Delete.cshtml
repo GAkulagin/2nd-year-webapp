@@ -1,0 +1,86 @@
+﻿@model SUARweb.Agreement
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление договора аренды</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Agreement_Status.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agreement_Status.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd>
+            @Model.Client.GetPassportAndFullname()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apartment.Client)
+        </dt>
+        
+        <dd>
+            @Model.Apartment.Client.GetPassportAndFullname()
+        </dd>
+        <dt>
+            Квартира
+        </dt>
+
+        <dd>
+            @Model.Apartment.GetAdress()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Model.StartDate.ToString("d")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Model.EndDate.ToString("d")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaySum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaySum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pay_Frequency.Frequency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pay_Frequency.Frequency)
+        </dd>
+
+    </dl>
+
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Agreements")';" />
+        </div>
+    }
+</div>

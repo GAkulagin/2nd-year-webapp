@@ -1,0 +1,152 @@
+﻿@model SUARweb.Building
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление здания</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Litera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Litera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverhaulYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverhaulYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FloorCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FloorCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concierge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concierge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Domofon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Domofon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UndegroundParking)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UndegroundParking)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Playground)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Playground)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Elevator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Elevator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Construction_Type.ConstructionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Construction_Type.ConstructionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Heating_Type.HeatingType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Heating_Type.HeatingType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Planning_Type.PlanningType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Planning_Type.PlanningType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <input type="button" value="Назад" onclick="window.location.href='@Url.Action("Index", "Buildings")';" />
+        </div>
+    }
+</div>
