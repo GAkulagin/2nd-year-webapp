@@ -81,10 +81,6 @@ namespace SUARweb.Controllers
         {
             agreement.StatusId = 1;
 
-            if(agreement.StartDate.Date < DateTime.Today) ModelState.AddModelError("StartDate", "Дата начала не может быть меньше текущей даты");
-            if (agreement.EndDate.Date <= agreement.StartDate.Date) ModelState.AddModelError("EndDate", "Дата окончания должна быть больше текущей даты");
-            if (agreement.PaySum < 0) ModelState.AddModelError("PaySum", "Неверный ввод данных");
-
             if (ModelState.IsValid)
             {
                 db.Agreements.Add(agreement);

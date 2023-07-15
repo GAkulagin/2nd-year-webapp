@@ -178,6 +178,10 @@
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\RentersDebtsController.cs" />
     <Compile Include="Controllers\SettlementsController.cs" />
+    <Compile Include="Models\CustomValidation\BuildYearAttribute.cs" />
+    <Compile Include="Models\CustomValidation\StartDateAttribute.cs" />
+    <Compile Include="Models\CustomValidation\IsAdultAtrribute.cs" />
+    <Compile Include="Models\CustomValidation\PaySumAttribute.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

@@ -47,8 +47,6 @@ namespace SUARweb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Sum,DateAndTime,AgreementId")] Payment payment)
         {
-            if (payment.Sum < 0) ModelState.AddModelError("Sum", "Неверный ввод данных");
-
             if (ModelState.IsValid)
             {
                 payment.DateAndTime = DateTime.Now;

@@ -12,7 +12,10 @@ namespace SUARweb.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using SUARweb.Exporters;
+    using SUARweb.Models.CustomValidation;
+
 
     public partial class Building : IExportableEntity
     {
@@ -23,36 +26,61 @@ namespace SUARweb.Models
         }
 
         public int ID { get; set; }
+
         [DisplayName("Улица")]
+        [Required(ErrorMessage = "Это поле обязательно")]
         public string Street { get; set; }
+
         [DisplayName("Номер здания")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(1, 1000, ErrorMessage = "Неверный формат ввода")]
         public int Number { get; set; }
+
         [DisplayName("Литера")]
+        [MaxLength(1, ErrorMessage = "Введено более одного символа")]
         public string Litera { get; set; }
+
         [DisplayName("Район")]
         public int DistrictId { get; set; }
+
         [DisplayName("Тип планировки")]
         public int PlanningTypeId { get; set; }
+
         [DisplayName("Тип конструкции")]
         public int ConstructionTypeId { get; set; }
+
         [DisplayName("Год постройки")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [BuildYear(ErrorMessage = "Неверный формат ввода")]
         public int BuildYear { get; set; }
+
         [DisplayName("Год капремонта")]
+        [CustomValidation(typeof(Building), "ValidateOverhaulYear")]
         public Nullable<int> OverhaulYear { get; set; }
+
         [DisplayName("Число этажей")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(1, 1000, ErrorMessage = "Неверный формат ввода")]
         public int FloorCount { get; set; }
+
         [DisplayName("Консьерж")]
         public bool Concierge { get; set; }
+
         [DisplayName("Домофон")]
         public bool Domofon { get; set; }
+
         [DisplayName("Территория ограждена")]
         public bool Fence { get; set; }
+
         [DisplayName("Подземный паркинг")]
         public bool UndegroundParking { get; set; }
+
         [DisplayName("Детская площадка")]
         public bool Playground { get; set; }
+
         [DisplayName("Лифт")]
         public bool Elevator { get; set; }
+
         [DisplayName("Отопление")]
         public int HeatingTypeId { get; set; }
 
@@ -63,6 +91,20 @@ namespace SUARweb.Models
         public virtual Heating_Type Heating_Type { get; set; }
         public virtual Planning_Type Planning_Type { get; set; }
 
+
+        public static ValidationResult ValidateOverhaulYear(object value, ValidationContext context)
+        {
+            if(value == null)
+                return ValidationResult.Success;
+
+            var year = (int)value;
+            var b = context.ObjectInstance as Building;
+
+            if (year >= b.BuildYear && year <= DateTime.Today.Year)
+                return ValidationResult.Success;
+
+            return new ValidationResult("Неверный формат ввода");
+        }
 
         public string GetAdress()
         {

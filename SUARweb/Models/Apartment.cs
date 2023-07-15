@@ -12,6 +12,7 @@ namespace SUARweb.Models
 
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using SUARweb.Exporters;
 
     public partial class Apartment : IExportableEntity
@@ -25,36 +26,60 @@ namespace SUARweb.Models
         public int ID { get; set; }
         [DisplayName("Статус квартиры")]
         public int StatusId { get; set; }
+
         [DisplayName("Номер")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(1, 100_000, ErrorMessage = "Неверный формат ввода")]
         public int Number { get; set; }
+
         [DisplayName("Число комнат")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(1, 1000, ErrorMessage = "Неверный формат ввода")]
         public int RoomCount { get; set; }
+
         [DisplayName("Общая площадь")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(0.0, 10_000.0, ErrorMessage = "Неверный формат ввода")]
         public decimal TotalArea { get; set; }
+
         [DisplayName("Жилая площадь")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [Range(0.0, 10_000.0, ErrorMessage = "Неверный формат ввода")]
         public decimal LivingArea { get; set; }
+
         [DisplayName("Балкон")]
         public int BalconyTypeId { get; set; }
+
         [DisplayName("Холодильник")]
         public bool Fridge { get; set; }
+
         [DisplayName("Кухонная плита")]
         public bool Stove { get; set; }
+
         [DisplayName("Стиральная машина")]
         public bool WashMachine { get; set; }
+
         [DisplayName("Кондиционер")]
         public bool AirConditioner { get; set; }
+
         [DisplayName("Интернет")]
         public int InternetConnTypeId { get; set; }
+
         [DisplayName("телевидение")]
         public int TvTypeId { get; set; }
+
         [DisplayName("Можно с питомцами")]
         public bool WithPets { get; set; }
+
         [DisplayName("Можно с детьми")]
         public bool WithChildren { get; set; }
+
         [DisplayName("Можно для мероприятий")]
         public bool ForEvents { get; set; }
+
         [DisplayName("Здание")]
         public int BuildingId { get; set; }
+
         [DisplayName("Арендодатель")]
         public string LessorId { get; set; }
 

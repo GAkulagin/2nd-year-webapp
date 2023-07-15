@@ -9,9 +9,9 @@
 
 namespace SUARweb.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Settlement
     {
@@ -22,10 +22,14 @@ namespace SUARweb.Models
         }
 
         public int ID { get; set; }
+
         [DisplayName("Населенный пункт")]
+        [Required(ErrorMessage = "Это поле обязательно")]
         public string Name { get; set; }
+
         [DisplayName("Тип")]
         public int TypeId { get; set; }
+
         [DisplayName("Регион")]
         public int SubjectId { get; set; }
 

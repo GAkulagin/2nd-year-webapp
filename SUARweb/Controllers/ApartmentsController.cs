@@ -71,9 +71,6 @@ namespace SUARweb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,StatusId,Number,RoomCount,TotalArea,LivingArea,BalconyTypeId,Fridge,Stove,WashMachine,AirConditioner,InternetConnTypeId,TvTypeId,WithPets,WithChildren,ForEvents,BuildingId,LessorId")] Apartment apartment)
         {
-            if(apartment.Number < 1) ModelState.AddModelError("Number", "Неверный ввод данных");
-            if (apartment.RoomCount < 1) ModelState.AddModelError("RoomCount", "Неверный ввод данных");
-
             if (ModelState.IsValid)
             {
                 db.Apartments.Add(apartment);
@@ -149,8 +146,6 @@ namespace SUARweb.Controllers
         }
 
         // POST: Apartments/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,StatusId,Number,RoomCount,TotalArea,LivingArea,BalconyTypeId,Fridge,Stove,WashMachine,AirConditioner,InternetConnTypeId,TvTypeId,WithPets,WithChildren,ForEvents,BuildingId,LessorId")] Apartment apartment)

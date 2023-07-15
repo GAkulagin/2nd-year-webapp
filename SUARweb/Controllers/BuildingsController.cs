@@ -53,21 +53,6 @@ namespace SUARweb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Street,Number,Litera,DistrictId,PlanningTypeId,ConstructionTypeId,BuildYear,OverhaulYear,FloorCount,Concierge,Domofon,Fence,UndegroundParking,Playground,Elevator,HeatingTypeId")] Building building)
         {
-            if(building.Number <= 0) ModelState.AddModelError("Number", "Неверный ввод данных");
-            if (building.FloorCount <= 0) ModelState.AddModelError("FloorCount", "Неверный ввод данных");
-            if(building.Litera != null && building.Litera.Length > 1) ModelState.AddModelError("Litera", "Введено более одного символа");
-
-            if (building.BuildYear > DateTime.Today.Year || building.BuildYear < 0) ModelState.AddModelError("BuildYear", "Неверный ввод данных");
-
-            if (building.OverhaulYear != null)
-            {
-                    if (building.OverhaulYear > DateTime.Today.Year) ModelState.AddModelError("OverhaulYear", "Неверный ввод данных");
-                    if (building.OverhaulYear < building.BuildYear) ModelState.AddModelError("OverhaulYear", "Год капремонта не может быть меньше года постройки");
-            }
-            else building.OverhaulYear = 0;
-
-            if (building.Litera == null) building.Litera = "";
-
             if (ModelState.IsValid)
             {
                 db.Buildings.Add(building);
@@ -121,20 +106,6 @@ namespace SUARweb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Street,Number,Litera,DistrictId,PlanningTypeId,ConstructionTypeId,BuildYear,OverhaulYear,FloorCount,Concierge,Domofon,Fence,UndegroundParking,Playground,Elevator,HeatingTypeId")] Building building)
         {
-            if (building.Number <= 0) ModelState.AddModelError("Number", "Неверный ввод данных");
-            if (building.FloorCount <= 0) ModelState.AddModelError("FloorCount", "Неверный ввод данных");
-            if (building.Litera != null && building.Litera.Length > 1) ModelState.AddModelError("Litera", "Введено более одного символа");
-
-            if (building.BuildYear > DateTime.Today.Year || building.BuildYear < 0) ModelState.AddModelError("BuildYear", "Неверный ввод данных");
-
-            if (building.OverhaulYear != 0)
-            {
-                    if (building.OverhaulYear > DateTime.Today.Year) ModelState.AddModelError("OverhaulYear", "Неверный ввод данных");
-                    if (building.OverhaulYear < building.BuildYear) ModelState.AddModelError("OverhaulYear", "Год капремонта не может быть меньше года постройки");
-            }
-
-            if (String.IsNullOrEmpty(building.Litera)) building.Litera = " ";
-
             if (ModelState.IsValid)
             {
                 db.Entry(building).State = EntityState.Modified;

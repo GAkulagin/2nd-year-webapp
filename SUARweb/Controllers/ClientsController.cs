@@ -42,16 +42,11 @@ namespace SUARweb.Controllers
         // POST: Clients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PassportID,Fullname,RegistrationAddress,Birthdate,GenderId,Citizenship,UFMScode,PassportDate,INN,KPP,BIK,BankAccount,Phone,Email")] Client client)
+        public ActionResult Create([Bind(Include = 
+            "PassportID,Fullname,RegistrationAddress,Birthdate,GenderId,Citizenship,UFMScode,PassportDate,INN,KPP,BIK,BankAccount,Phone,Email")] Client client)
         {
-            if(!CheckPassportID(client.PassportID))
+            if(!CheckPassportID(client.PassportID)) 
                 ModelState.AddModelError("PassportID", "Клиент с таким паспортом уже есть в базе данных");
-
-            if (!CheckBirthDate(client.Birthdate))
-                ModelState.AddModelError("Birthdate", "Клиент должен быть совершеннолетним");
-
-            if (!CheckPassportDate(client.Birthdate, client.PassportDate))
-                ModelState.AddModelError("PassportDate", "Срок действия паспорта клиента истек, либо дата введена неверно");
 
             if (ModelState.IsValid)
             {
@@ -83,14 +78,9 @@ namespace SUARweb.Controllers
         // POST: Clients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PassportID,Fullname,RegistrationAddress,Birthdate,GenderId,Citizenship,UFMScode,PassportDate,INN,KPP,BIK,BankAccount,Phone,Email")] Client client)
+        public ActionResult Edit([Bind(Include = 
+            "PassportID,Fullname,RegistrationAddress,Birthdate,GenderId,Citizenship,UFMScode,PassportDate,INN,KPP,BIK,BankAccount,Phone,Email")] Client client)
         {
-
-            if (!CheckBirthDate(client.Birthdate))
-                ModelState.AddModelError("Birthdate", "Клиент должен быть совершеннолетним");
-
-            if (!CheckPassportDate(client.Birthdate, client.PassportDate))
-                ModelState.AddModelError("PassportDate", "Срок действия паспорта клиента истек, либо дата введена неверно");
 
             if (ModelState.IsValid)
             {
@@ -98,6 +88,7 @@ namespace SUARweb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.GenderId = new SelectList(db.Genders, "ID", "Value", client.Gender);
             return View(client);
         }
@@ -159,36 +150,11 @@ namespace SUARweb.Controllers
             base.Dispose(disposing);
         }
 
-
-        private bool CheckBirthDate(DateTime date)
-        {
-            var age = DateTime.Today.Year - date.Year;
-            if (date > DateTime.Today.AddYears(-age)) age--;
-
-            return age >= 18;
-        }
-
-        private bool CheckPassportDate(DateTime birthdate, DateTime passportDate)
-        {
-            var today = DateTime.Today;
-
-            return !(passportDate < birthdate || passportDate > today);
-        }
-
         private bool CheckPassportID(string passport)
         {
-            bool ok = true;
+            var client = db.Clients.Find(passport);
 
-            foreach(var c in db.Clients)
-            {
-                if(c.PassportID == passport)
-                {
-                    ok = false;
-                    break;
-                }
-            }
-
-            return ok;
+            return client == null;
         }
     }
 }

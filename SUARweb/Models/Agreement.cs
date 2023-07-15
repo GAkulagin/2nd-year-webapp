@@ -9,9 +9,12 @@
 
 namespace SUARweb.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using SUARweb.Exporters;
+    using SUARweb.Models.CustomValidation;
 
     public partial class Agreement : IExportableEntity
     {
@@ -22,18 +25,31 @@ namespace SUARweb.Models
         }
 
         public int ID { get; set; }
+
         [DisplayName("Статус договора")]
         public int StatusId { get; set; }
+
         [DisplayName("Дата начала")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [StartDate(ErrorMessage = "Дата начала не может быть меньше текущей даты")]
         public System.DateTime StartDate { get; set; }
+
         [DisplayName("Дата окончания")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [CustomValidation(typeof(Agreement), "ValidateEndDate")]
         public System.DateTime EndDate { get; set; }
+
         [DisplayName("Частота платы")]
         public int PayFrequencyId { get; set; }
+
         [DisplayName("Арендная плата")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [PaySum(ErrorMessage = "Неверный формат ввода")]
         public decimal PaySum { get; set; }
+
         [DisplayName("Арендатор")]
         public string RenterId { get; set; }
+
         [DisplayName("Квартира")]
         public int ApartmentId { get; set; }
 
@@ -58,6 +74,17 @@ namespace SUARweb.Models
                 { "Сумма платы", PaySum },
                 { "Частота платы", Pay_Frequency.Frequency },
             };
+        }
+
+        public static ValidationResult ValidateEndDate(object value, ValidationContext context)
+        {
+            var endDate = (DateTime)value;
+            var agreement = context.ObjectInstance as Agreement;
+
+            if (endDate.Date > agreement.StartDate.Date)
+                return ValidationResult.Success;
+
+            return new ValidationResult("Дата окончания должна быть больше даты начала");
         }
     }
 }

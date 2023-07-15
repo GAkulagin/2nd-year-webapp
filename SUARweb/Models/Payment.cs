@@ -11,15 +11,22 @@ namespace SUARweb.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using SUARweb.Exporters;
+    using SUARweb.Models.CustomValidation;
 
     public partial class Payment : IExportableEntity
     {
         public int ID { get; set; }
+
         [DisplayName("Сумма")]
+        [Required(ErrorMessage = "Это поле обязательно")]
+        [PaySum(ErrorMessage = "Неверный формат ввода")]
         public decimal Sum { get; set; }
+
         [DisplayName("Время")]
         public System.DateTime DateAndTime { get; set; }
+
         [DisplayName("Договор")]
         public int AgreementId { get; set; }
 
