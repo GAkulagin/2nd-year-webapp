@@ -7,25 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Rental_Status
+    public partial class Subject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rental_Status()
+        public Subject()
         {
-            this.Apartments = new HashSet<Apartment>();
+            this.Settlements = new HashSet<Settlement>();
         }
     
         public int ID { get; set; }
-        [DisplayName("Статус квартиры")]
-        public string Status { get; set; }
+        [DisplayName("Регион")]
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apartment> Apartments { get; set; }
+        public virtual ICollection<Settlement> Settlements { get; set; }
     }
 }

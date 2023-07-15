@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SUARweb.Exporters;
 
-    public partial class Client
+    public partial class Client : IExportableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
@@ -50,13 +50,33 @@ namespace SUARweb
         public string Phone { get; set; }
         [DisplayName("Эл. почта")]
         public string Email { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agreement> Agreements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual Gender Gender { get; set; }
 
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "ФИО", Fullname },
+                { "Дата рождения", Birthdate },
+                { "Пол", Gender.Value },
+                { "Гражданство", Citizenship },
+                { "Адрес регистрации", RegistrationAddress },
+                { "Серия и номер паспорта", PassportID },
+                { "Дата выдачи паспорта", PassportDate },
+                { "Код УФМС", UFMScode },
+                { "ИНН", INN },
+                { "КПП", KPP },
+                { "БИК", BIK },
+                { "Расчетный счет", BankAccount },
+                { "Телефон", Phone },
+                { "Электронная почта", Email },
+            };
+        }
 
         public string GetPassportAndFullname()
         {

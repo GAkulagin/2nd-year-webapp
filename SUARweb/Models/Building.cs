@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SUARweb.Exporters;
 
-    public partial class Building
+    public partial class Building : IExportableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Building()
         {
             this.Apartments = new HashSet<Apartment>();
         }
-    
+
         public int ID { get; set; }
         [DisplayName("Улица")]
         public string Street { get; set; }
@@ -54,7 +55,7 @@ namespace SUARweb
         public bool Elevator { get; set; }
         [DisplayName("Отопление")]
         public int HeatingTypeId { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual Construction_Type Construction_Type { get; set; }
@@ -70,6 +71,30 @@ namespace SUARweb
                        District.Settlement.Name + ", " +
                        Street + ", д. " +
                        Number;
+        }
+
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "Субъект РФ", District.Settlement.Subject.Name },
+                { "Населенный пункт", District.Settlement.Settlement_Type.Type + " " + District.Settlement.Name },
+                { "Район", District.Name },
+                { "Улица", Street },
+                { "Номер", Number },
+                { "Литера", Litera },
+                { "Год постройки", BuildYear },
+                { "Год капремонта", OverhaulYear },
+                { "Тип конструкции", Construction_Type.ConstructionType },
+                { "Тип отопления", Heating_Type.HeatingType },
+                { "Тип планировки", Planning_Type.PlanningType },
+                { "Консьерж", Concierge },
+                { "Домофон", Domofon },
+                { "Ограждения", Fence },
+                { "Подземная парковка", UndegroundParking },
+                { "Детская площадка", Playground },
+                { "Лифт", Elevator },
+            };
         }
     }
 }

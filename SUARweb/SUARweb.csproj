@@ -143,28 +143,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agreement.cs">
+    <Compile Include="Exporters\ExcelExporter.cs" />
+    <Compile Include="Exporters\IExportableEntity.cs" />
+    <Compile Include="Exporters\IMemoryExporter.cs" />
+    <Compile Include="Models\Agreement.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Agreement_Status.cs">
+    <Compile Include="Models\Agreement_Status.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Apartment.cs">
+    <Compile Include="Models\Apartment.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Balcony_Type.cs">
+    <Compile Include="Models\Balcony_Type.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Building.cs">
+    <Compile Include="Models\Building.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs">
+    <Compile Include="Models\Client.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Construction_Type.cs">
+    <Compile Include="Models\Construction_Type.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AgreementsController.cs" />
@@ -175,60 +178,60 @@
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\RentersDebtsController.cs" />
     <Compile Include="Controllers\SettlementsController.cs" />
-    <Compile Include="District.cs">
+    <Compile Include="Models\District.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Gender.cs">
+    <Compile Include="Models\Gender.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Heating_Type.cs">
+    <Compile Include="Models\Heating_Type.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Internet_Conn.cs">
+    <Compile Include="Models\Internet_Conn.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models.Context.cs">
+    <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models.cs">
+    <Compile Include="Models\Models.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models.Designer.cs">
+    <Compile Include="Models\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RentersDebts.cs" />
-    <Compile Include="Payment.cs">
+    <Compile Include="Models\Payment.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pay_Frequency.cs">
+    <Compile Include="Models\Pay_Frequency.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Planning_Type.cs">
+    <Compile Include="Models\Planning_Type.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rental_Status.cs">
+    <Compile Include="Models\Rental_Status.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Settlement.cs">
+    <Compile Include="Models\Settlement.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Settlement_Type.cs">
+    <Compile Include="Models\Settlement_Type.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Subject.cs">
+    <Compile Include="Models\Subject.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Television.cs">
+    <Compile Include="Models\Television.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -241,23 +244,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models.Context.tt">
+    <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models.tt">
+    <Content Include="Models\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models.edmx">
+    <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models.edmx.diagram">
+    <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

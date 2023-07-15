@@ -7,25 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Internet_Conn
+    public partial class Settlement
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Internet_Conn()
+        public Settlement()
         {
-            this.Apartments = new HashSet<Apartment>();
+            this.Districts = new HashSet<District>();
         }
-    
+
         public int ID { get; set; }
-        [DisplayName("Интернет")]
-        public string ConnectionType { get; set; }
-    
+        [DisplayName("Населенный пункт")]
+        public string Name { get; set; }
+        [DisplayName("Тип")]
+        public int TypeId { get; set; }
+        [DisplayName("Регион")]
+        public int SubjectId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apartment> Apartments { get; set; }
+        public virtual ICollection<District> Districts { get; set; }
+        public virtual Settlement_Type Settlement_Type { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }

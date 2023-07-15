@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
-{
-    using System;
+namespace SUARweb.Models
+{ 
+
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SUARweb.Exporters;
 
-    public partial class Apartment
+    public partial class Apartment : IExportableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Apartment()
         {
             this.Agreements = new HashSet<Agreement>();
         }
-    
+
         public int ID { get; set; }
         [DisplayName("Статус квартиры")]
         public int StatusId { get; set; }
@@ -56,7 +57,7 @@ namespace SUARweb
         public int BuildingId { get; set; }
         [DisplayName("Арендодатель")]
         public string LessorId { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agreement> Agreements { get; set; }
         public virtual Balcony_Type Balcony_Type { get; set; }
@@ -75,6 +76,30 @@ namespace SUARweb
                        Building.Street + ", д. " +
                        Building.Number + ", кв. " +
                        Number;
+        }
+
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "Адрес здания", Building.GetAdress() },
+                { "Номер квартиры", Number },
+                { "Арендодатель", Client.GetPassportAndFullname() },
+                { "Арендный статус", Rental_Status.Status },
+                { "Число комнат", RoomCount },
+                { "Общая площадь", TotalArea },
+                { "Жилая площадь", LivingArea },
+                { "Холодильник", Fridge },
+                { "Кухонная плита", Stove },
+                { "Стиральная машина", WashMachine },
+                { "Кондиционер", AirConditioner },
+                { "С детьми", WithChildren },
+                { "С питомцами", WithPets },
+                { "Для мероприятий", ForEvents },
+                { "Балкон", Balcony_Type.BalconyType },
+                { "Интернет", Internet_Conn.ConnectionType },
+                { "Телевидение", Television.TVtype },
+            };
         }
     }
 }

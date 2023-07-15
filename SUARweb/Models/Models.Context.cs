@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Data.Entity;
@@ -24,7 +24,7 @@ namespace SUARweb
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Agreement_Status> AgreementStatus { get; set; }
         public virtual DbSet<Agreement> Agreements { get; set; }
         public virtual DbSet<Apartment> Apartments { get; set; }

@@ -7,13 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SUARweb.Exporters;
 
-    public partial class Payment
+    public partial class Payment : IExportableEntity
     {
         public int ID { get; set; }
         [DisplayName("Сумма")]
@@ -22,7 +22,20 @@ namespace SUARweb
         public System.DateTime DateAndTime { get; set; }
         [DisplayName("Договор")]
         public int AgreementId { get; set; }
-    
+
         public virtual Agreement Agreement { get; set; }
+
+
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "Код договора", Agreement.ID },
+                { "Плательщик", Agreement.Client.GetPassportAndFullname() },
+                { "Получатель", Agreement.Apartment.Client.GetPassportAndFullname() },
+                { "Сумма", Sum },
+                { "Дата и время", DateAndTime },
+            };
+        }
     }
 }

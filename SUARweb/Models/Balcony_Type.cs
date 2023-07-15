@@ -7,28 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class District
+    public partial class Balcony_Type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public District()
+        public Balcony_Type()
         {
-            this.Buildings = new HashSet<Building>();
+            this.Apartments = new HashSet<Apartment>();
         }
-    
+
         public int ID { get; set; }
-        [DisplayName("Населенный пункт")]
-        public int SettlementId { get; set; }
-        [DisplayName("Район")]
-        public string Name { get; set; }
-    
+        [DisplayName("Балкон")]
+        public string BalconyType { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Building> Buildings { get; set; }
-        public virtual Settlement Settlement { get; set; }
+        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }

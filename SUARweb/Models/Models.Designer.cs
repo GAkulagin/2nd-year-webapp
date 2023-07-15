@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "G:\Users\User\source\repos\2nd-term-paper-web-application\SUARweb\Models.edmx" включено. 
+﻿// Создание кода T4 для модели "G:\Users\User\source\repos\2nd-term-paper-web-application\SUARweb\Models\Models.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

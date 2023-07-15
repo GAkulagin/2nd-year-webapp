@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web.Mvc;
-using ClosedXML.Excel;
+using SUARweb.Exporters;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {
@@ -201,65 +201,15 @@ namespace SUARweb.Controllers
 
         public ActionResult ExportToExcel()
         {
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(db.Buildings.ToList<IExportableEntity>());
+            string filename = $"buildings_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Здания");
-
-                worksheet.Cell("A1").Value = "Субъект РФ";
-                worksheet.Cell("B1").Value = "Населенный пункт";
-                worksheet.Cell("C1").Value = "Район";
-                worksheet.Cell("D1").Value = "Улица";
-                worksheet.Cell("E1").Value = "Номер";
-                worksheet.Cell("F1").Value = "Литера";
-                worksheet.Cell("G1").Value = "Год постройки";
-                worksheet.Cell("H1").Value = "Год капремонта";
-                worksheet.Cell("I1").Value = "Тип конструкции";
-                worksheet.Cell("J1").Value = "Тип отопления";
-                worksheet.Cell("K1").Value = "Тип планировки";
-                worksheet.Cell("L1").Value = "Консьерж";
-                worksheet.Cell("M1").Value = "Домофон";
-                worksheet.Cell("N1").Value = "Ограждения";
-                worksheet.Cell("O1").Value = "Подземная парковка";
-                worksheet.Cell("P1").Value = "Детская площадка";
-                worksheet.Cell("Q1").Value = "Лифт";
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int row = 2;
-
-                foreach (var b in db.Buildings)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, 1).Value = b.District.Settlement.Subject.Name;
-                    worksheet.Cell(row, 2).Value = b.District.Settlement.Settlement_Type.Type + " " + b.District.Settlement.Name;
-                    worksheet.Cell(row, 3).Value = b.District.Name;
-                    worksheet.Cell(row, 4).Value = b.Street;
-                    worksheet.Cell(row, 5).Value = b.Number;
-                    worksheet.Cell(row, 6).Value = b.Litera;
-                    worksheet.Cell(row, 7).Value = b.BuildYear;
-                    worksheet.Cell(row, 8).Value = b.OverhaulYear;
-                    worksheet.Cell(row, 9).Value = b.Construction_Type.ConstructionType;
-                    worksheet.Cell(row, 10).Value = b.Heating_Type.HeatingType;
-                    worksheet.Cell(row, 11).Value = b.Planning_Type.PlanningType;
-                    worksheet.Cell(row, 12).Value = b.Concierge;
-                    worksheet.Cell(row, 13).Value = b.Domofon;
-                    worksheet.Cell(row, 14).Value = b.Fence;
-                    worksheet.Cell(row, 15).Value = b.UndegroundParking;
-                    worksheet.Cell(row, 16).Value = b.Playground;
-                    worksheet.Cell(row, 17).Value = b.Elevator;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"buildings_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
     }

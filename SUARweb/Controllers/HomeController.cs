@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {

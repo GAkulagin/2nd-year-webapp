@@ -7,7 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System.Threading;
-using ClosedXML.Excel;
+using SUARweb.Models;
+using SUARweb.Exporters;
 
 namespace SUARweb.Controllers
 {
@@ -234,48 +235,17 @@ namespace SUARweb.Controllers
 
         public ActionResult ExportToExcel()
         {
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(db.Agreements.ToList<IExportableEntity>());
+            string filename = $"agreements_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Договоры");
-
-                worksheet.Cell("A1").Value = "Статус";
-                worksheet.Cell("B1").Value = "Арендатор";
-                worksheet.Cell("C1").Value = "Арендодатель";
-                worksheet.Cell("D1").Value = "Квартира";
-                worksheet.Cell("E1").Value = "Дата начала";
-                worksheet.Cell("F1").Value = "Дата окончания";
-                worksheet.Cell("G1").Value = "Сумма платы";
-                worksheet.Cell("H1").Value = "Частота платы";
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int row = 2;
-
-                foreach (var b in db.Agreements)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, 1).Value = b.Agreement_Status.Status;
-                    worksheet.Cell(row, 2).Value = b.Client.GetPassportAndFullname();
-                    worksheet.Cell(row, 3).Value = b.Apartment.Client.GetPassportAndFullname();
-                    worksheet.Cell(row, 4).Value = b.Apartment.GetAdress();
-                    worksheet.Cell(row, 5).Value = b.StartDate;
-                    worksheet.Cell(row, 6).Value = b.EndDate;
-                    worksheet.Cell(row, 7).Value = b.PaySum;
-                    worksheet.Cell(row, 8).Value = b.Pay_Frequency.Frequency;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"agreements_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
     }
 }
+

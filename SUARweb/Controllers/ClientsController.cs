@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web.Mvc;
-using ClosedXML.Excel;
+using SUARweb.Exporters;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {
@@ -137,60 +137,15 @@ namespace SUARweb.Controllers
 
         public ActionResult ExportToExcel()
         {
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(db.Clients.ToList<IExportableEntity>());
+            string filename = $"clients_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Клиенты");
-
-                worksheet.Cell("A1").Value = "ФИО";
-                worksheet.Cell("B1").Value = "Дата рождения";
-                worksheet.Cell("C1").Value = "Пол";
-                worksheet.Cell("D1").Value = "Гражданство";
-                worksheet.Cell("E1").Value = "Адрес регистрации";
-                worksheet.Cell("F1").Value = "Серия и номер паспорта";
-                worksheet.Cell("G1").Value = "Дата выдачи паспорта";
-                worksheet.Cell("H1").Value = "Код УФМС";
-                worksheet.Cell("I1").Value = "ИНН";
-                worksheet.Cell("J1").Value = "КПП";
-                worksheet.Cell("K1").Value = "БИК";
-                worksheet.Cell("L1").Value = "Расчетный счет";
-                worksheet.Cell("M1").Value = "Телефон";
-                worksheet.Cell("N1").Value = "Электронная почта";
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int col = 1;
-                int row = 2;
-
-                foreach(var c in db.Clients)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, col).Value = c.Fullname;
-                    worksheet.Cell(row, col + 1).Value = c.Birthdate.ToString("d");
-                    worksheet.Cell(row, col + 2).Value = c.Gender.Value;
-                    worksheet.Cell(row, col + 3).Value = c.Citizenship;
-                    worksheet.Cell(row, col + 4).Value = c.RegistrationAddress;
-                    worksheet.Cell(row, col + 5).Value = c.PassportID;
-                    worksheet.Cell(row, col + 6).Value = c.PassportDate.ToString("d"); ;
-                    worksheet.Cell(row, col + 7).Value = c.UFMScode;
-                    worksheet.Cell(row, col + 8).Value = c.INN;
-                    worksheet.Cell(row, col + 9).Value = c.KPP;
-                    worksheet.Cell(row, col + 10).Value = c.BIK;
-                    worksheet.Cell(row, col + 11).Value = c.BankAccount;
-                    worksheet.Cell(row, col + 12).Value = c.Phone;
-                    worksheet.Cell(row, col + 13).Value = c.Email;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"clients_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
 

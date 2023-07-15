@@ -7,31 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Settlement
+    public partial class Planning_Type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Settlement()
+        public Planning_Type()
         {
-            this.Districts = new HashSet<District>();
+            this.Buildings = new HashSet<Building>();
         }
     
         public int ID { get; set; }
-        [DisplayName("Населенный пункт")]
-        public string Name { get; set; }
-        [DisplayName("Тип")]
-        public int TypeId { get; set; }
-        [DisplayName("Регион")]
-        public int SubjectId { get; set; }
+        [DisplayName("Тип планировки")]
+        public string PlanningType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<District> Districts { get; set; }
-        public virtual Settlement_Type Settlement_Type { get; set; }
-        public virtual Subject Subject { get; set; }
+        public virtual ICollection<Building> Buildings { get; set; }
     }
 }

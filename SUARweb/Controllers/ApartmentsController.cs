@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web.Mvc;
-using ClosedXML.Excel;
+using SUARweb.Exporters;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {
@@ -231,65 +231,15 @@ namespace SUARweb.Controllers
 
         public ActionResult ExportToExcel()
         {
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(db.Apartments.ToList<IExportableEntity>());
+            string filename = $"apartments_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Квартиры");
-
-                worksheet.Cell("A1").Value = "Адрес здания";
-                worksheet.Cell("B1").Value = "Номер квартиры";
-                worksheet.Cell("C1").Value = "Арендодатель";
-                worksheet.Cell("D1").Value = "Арендный статус";
-                worksheet.Cell("E1").Value = "Число комнат";
-                worksheet.Cell("F1").Value = "Общая площадь";
-                worksheet.Cell("G1").Value = "Жилая площадь";
-                worksheet.Cell("H1").Value = "Холодильник";
-                worksheet.Cell("I1").Value = "Кухонная плита";
-                worksheet.Cell("J1").Value = "Стиральная машина";
-                worksheet.Cell("K1").Value = "Кондиционер";
-                worksheet.Cell("L1").Value = "С детьми";
-                worksheet.Cell("M1").Value = "С питомцами";
-                worksheet.Cell("N1").Value = "Для мероприятий";
-                worksheet.Cell("O1").Value = "Балкон";
-                worksheet.Cell("P1").Value = "Интернет";
-                worksheet.Cell("Q1").Value = "Телевидение";
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int row = 2;
-
-                foreach (var b in db.Apartments)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, 1).Value = b.GetAdress();
-                    worksheet.Cell(row, 2).Value = b.Number;
-                    worksheet.Cell(row, 3).Value = b.Client.GetPassportAndFullname();
-                    worksheet.Cell(row, 4).Value = b.Rental_Status.Status;
-                    worksheet.Cell(row, 5).Value = b.RoomCount;
-                    worksheet.Cell(row, 6).Value = b.TotalArea;
-                    worksheet.Cell(row, 7).Value = b.LivingArea;
-                    worksheet.Cell(row, 8).Value = b.Fridge;
-                    worksheet.Cell(row, 9).Value = b.Stove;
-                    worksheet.Cell(row, 10).Value = b.WashMachine;
-                    worksheet.Cell(row, 11).Value = b.AirConditioner;
-                    worksheet.Cell(row, 12).Value = b.WithChildren;
-                    worksheet.Cell(row, 13).Value = b.WithPets;
-                    worksheet.Cell(row, 14).Value = b.ForEvents;
-                    worksheet.Cell(row, 15).Value = b.Balcony_Type.BalconyType;
-                    worksheet.Cell(row, 16).Value = b.Internet_Conn.ConnectionType;
-                    worksheet.Cell(row, 17).Value = b.Television.TVtype;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"apartments_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
     }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ClosedXML.Excel;
+using SUARweb.Exporters;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {
@@ -98,42 +98,15 @@ namespace SUARweb.Controllers
 
         public ActionResult ExportToExcel()
         {
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(db.Payments.ToList<IExportableEntity>());
+            string filename = $"payments_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Платежи");
-
-                worksheet.Cell("A1").Value = "Код договора";
-                worksheet.Cell("B1").Value = "Плательщик";
-                worksheet.Cell("C1").Value = "Получатель";
-                worksheet.Cell("D1").Value = "Сумма";
-                worksheet.Cell("E1").Value = "Дата и время";
-
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int row = 2;
-
-                foreach (var b in db.Payments)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, 1).Value = b.AgreementId;
-                    worksheet.Cell(row, 2).Value = b.Agreement.Client.GetPassportAndFullname();
-                    worksheet.Cell(row, 3).Value = b.Agreement.Apartment.Client.GetPassportAndFullname();
-                    worksheet.Cell(row, 4).Value = b.Sum;
-                    worksheet.Cell(row, 5).Value = b.DateAndTime;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"payments_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
     }

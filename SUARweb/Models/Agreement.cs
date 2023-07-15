@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SUARweb.Exporters;
 
-    public partial class Agreement
+    public partial class Agreement : IExportableEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Agreement()
         {
             this.Payments = new HashSet<Payment>();
         }
-    
+
         public int ID { get; set; }
         [DisplayName("Статус договора")]
         public int StatusId { get; set; }
@@ -36,12 +36,28 @@ namespace SUARweb
         public string RenterId { get; set; }
         [DisplayName("Квартира")]
         public int ApartmentId { get; set; }
-    
+
         public virtual Agreement_Status Agreement_Status { get; set; }
         public virtual Apartment Apartment { get; set; }
         public virtual Client Client { get; set; }
         public virtual Pay_Frequency Pay_Frequency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
+
+        
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "Статус", Agreement_Status.Status },
+                { "Арендатор", Client.GetPassportAndFullname() },
+                { "Арендодатель", Apartment.Client.GetPassportAndFullname() },
+                { "Квартира", Apartment.GetAdress() },
+                { "Дата начала", StartDate },
+                { "Дата окончания", EndDate },
+                { "Сумма платы", PaySum },
+                { "Частота платы", Pay_Frequency.Frequency },
+            };
+        }
     }
 }

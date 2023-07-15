@@ -7,25 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Planning_Type
+    public partial class Internet_Conn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Planning_Type()
+        public Internet_Conn()
         {
-            this.Buildings = new HashSet<Building>();
+            this.Apartments = new HashSet<Apartment>();
         }
     
         public int ID { get; set; }
-        [DisplayName("Тип планировки")]
-        public string PlanningType { get; set; }
+        [DisplayName("Интернет")]
+        public string ConnectionType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Building> Buildings { get; set; }
+        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }

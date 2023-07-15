@@ -7,25 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Heating_Type
+    public partial class Agreement_Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Heating_Type()
+        public Agreement_Status()
         {
-            this.Buildings = new HashSet<Building>();
+            this.Agreements = new HashSet<Agreement>();
         }
-    
+
         public int ID { get; set; }
-        [DisplayName("Отопление")]
-        public string HeatingType { get; set; }
-    
+        [DisplayName("Статус договора")]
+        public string Status { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Building> Buildings { get; set; }
+        public virtual ICollection<Agreement> Agreements { get; set; }
     }
 }

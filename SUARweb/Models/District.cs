@@ -7,25 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SUARweb
+namespace SUARweb.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Television
+    public partial class District
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Television()
+        public District()
         {
-            this.Apartments = new HashSet<Apartment>();
+            this.Buildings = new HashSet<Building>();
         }
-    
+
         public int ID { get; set; }
-        [DisplayName("Телевидение")]
-        public string TVtype { get; set; }
-    
+        [DisplayName("Населенный пункт")]
+        public int SettlementId { get; set; }
+        [DisplayName("Район")]
+        public string Name { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apartment> Apartments { get; set; }
+        public virtual ICollection<Building> Buildings { get; set; }
+        public virtual Settlement Settlement { get; set; }
     }
 }

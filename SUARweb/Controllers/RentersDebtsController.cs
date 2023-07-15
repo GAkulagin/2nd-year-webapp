@@ -5,8 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Web.Mvc;
 using SUARweb.Models;
-using ClosedXML.Excel;
-using System.IO;
+using SUARweb.Exporters;
 
 namespace SUARweb.Controllers
 {
@@ -106,7 +105,7 @@ namespace SUARweb.Controllers
         public ActionResult ExportToExcel()
         {
             var agreements = db.Agreements.Include(a => a.Agreement_Status).Include(a => a.Apartment).Include(a => a.Client).Include(a => a.Pay_Frequency);
-            List<RentersDebts> RDlist = new List<RentersDebts>();
+            var RDlist = new List<IExportableEntity>();
 
             foreach (var agreement in agreements)
             {
@@ -123,49 +122,15 @@ namespace SUARweb.Controllers
                 });
             }
 
-            using (XLWorkbook workbook = new XLWorkbook(XLEventTracking.Disabled))
+            var exporter = new ExcelExporter(RDlist);
+            string filename = $"agreements_{DateTime.UtcNow.ToShortDateString()}.xlsx";
+
+            using (var stream = exporter.ExportToMemoryStream())
             {
-                var worksheet = workbook.Worksheets.Add("Задолженности арендаторов");
-
-                worksheet.Cell("A1").Value = "Код договора";
-                worksheet.Cell("B1").Value = "Арендатор";
-                worksheet.Cell("C1").Value = "Дата начала";
-                worksheet.Cell("D1").Value = "Дата окончания";
-                worksheet.Cell("E1").Value = "Частота платы";
-                worksheet.Cell("F1").Value = "Сумма платы";
-                worksheet.Cell("G1").Value = "Сумма оплаты";
-                worksheet.Cell("H1").Value = "Выплачено";
-                worksheet.Cell("I1").Value = "Задолженность";
-                worksheet.Row(1).Style.Font.Bold = true;
-
-                int row = 2;
-
-                foreach (var b in RDlist)
+                return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    worksheet.Cell(row, 1).Value = b.AgreementId;
-                    worksheet.Cell(row, 2).Value = b.Renter;
-                    worksheet.Cell(row, 3).Value = b.StartDate;
-                    worksheet.Cell(row, 4).Value = b.EndDate;
-                    worksheet.Cell(row, 5).Value = b.PayFrequency;
-                    worksheet.Cell(row, 6).Value = b.PaySum;
-                    worksheet.Cell(row, 7).Value = b.HaveToPay;
-                    worksheet.Cell(row, 8).Value = b.Paid;
-                    worksheet.Cell(row, 9).Value = b.Difference;
-
-                    row++;
-                }
-
-                using (var stream = new MemoryStream())
-                {
-                    workbook.SaveAs(stream);
-                    stream.Flush();
-
-                    return new FileContentResult(stream.ToArray(),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    {
-                        FileDownloadName = $"rentersdebts_{DateTime.UtcNow.ToShortDateString()}.xlsx"
-                    };
-                }
+                    FileDownloadName = filename
+                };
             }
         }
     }

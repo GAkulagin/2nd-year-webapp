@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using SUARweb.Models;
 
 namespace SUARweb.Controllers
 {

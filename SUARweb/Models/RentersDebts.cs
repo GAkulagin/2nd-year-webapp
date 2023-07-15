@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using SUARweb.Exporters;
 
 namespace SUARweb.Models
 {
-    public class RentersDebts
+    public class RentersDebts : IExportableEntity
     {
         [DisplayName("Код договора")]
         public int AgreementId { get; set; }
@@ -34,5 +36,22 @@ namespace SUARweb.Models
         public System.DateTime StartDate { get; set; }
         [DisplayName("Дата окончания")]
         public System.DateTime EndDate { get; set; }
+
+
+        public Dictionary<string, dynamic> GetExportData()
+        {
+            return new Dictionary<string, dynamic>()
+            {
+                { "Код договора", AgreementId },
+                { "Арендатор", Renter },
+                { "Дата начала", StartDate },
+                { "Дата окончания", EndDate },
+                { "Частота платы", PayFrequency },
+                { "Сумма платы", PaySum },
+                { "Плата по договору", HaveToPay },
+                { "Выплачено", Paid },
+                { "Задолженность", Difference },
+            };
+        }
     }
 }
