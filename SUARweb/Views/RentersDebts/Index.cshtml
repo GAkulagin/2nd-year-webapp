@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SUARweb.Models.RentersDebts>
+﻿@model IEnumerable<SUARweb.Models.Debt>
 
 @{
     ViewBag.Title = "Index";
@@ -55,19 +55,19 @@
             @Html.DisplayNameFor(model => model.Agreement)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Renter)
+            @Html.DisplayNameFor(model => model.Agreement.Client.Fullname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Agreement.StartDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.Agreement.EndDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PayFrequency)
+            @Html.DisplayNameFor(model => model.Agreement.Pay_Frequency.Frequency)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaySum)
+            @Html.DisplayNameFor(model => model.Agreement.PaySum)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.HaveToPay)
@@ -88,19 +88,19 @@
                 @Html.DisplayFor(modelItem => item.Agreement.ID)
             </td>
             <td>
-                @item.Renter.GetPassportAndFullname()
+                @item.Agreement.Client.GetPassportAndFullname()
             </td>
            <td>
-                @item.StartDate.ToString("d")
+                @item.Agreement.StartDate.ToString("d")
             </td>
             <td>
-                @item.EndDate.ToString("d")
+                @item.Agreement.EndDate.ToString("d")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PayFrequency.Frequency)
+                @Html.DisplayFor(modelItem => item.Agreement.Pay_Frequency.Frequency)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaySum)
+                @Html.DisplayFor(modelItem => item.Agreement.PaySum)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HaveToPay)

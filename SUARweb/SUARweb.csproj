@@ -214,7 +214,7 @@
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RentalStatusCode.cs" />
-    <Compile Include="Models\RentersDebts.cs" />
+    <Compile Include="Models\Debt.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
