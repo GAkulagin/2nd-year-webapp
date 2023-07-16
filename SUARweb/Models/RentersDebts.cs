@@ -6,12 +6,12 @@ namespace SUARweb.Models
 {
     public class RentersDebts : IExportableEntity
     {
-        [DisplayName("Код договора")]
-        public int AgreementId { get; set; }
+        [DisplayName("Договор")]
+        public Agreement Agreement { get; set; }
         [DisplayName("Арендатор")]
-        public string Renter { get; set; }
+        public Client Renter { get; set; }
         [DisplayName("Частота платы")]
-        public string PayFrequency { get; set; }
+        public Pay_Frequency PayFrequency { get; set; }
         [DisplayName("Сумма платы")]
         public decimal PaySum { get; set; }
         [DisplayName("Необходимо выплатить")]
@@ -42,11 +42,11 @@ namespace SUARweb.Models
         {
             return new Dictionary<string, dynamic>()
             {
-                { "Код договора", AgreementId },
-                { "Арендатор", Renter },
+                { "Код договора", Agreement.ID },
+                { "Арендатор", Renter.GetPassportAndFullname() },
                 { "Дата начала", StartDate },
                 { "Дата окончания", EndDate },
-                { "Частота платы", PayFrequency },
+                { "Частота платы", PayFrequency.Frequency },
                 { "Сумма платы", PaySum },
                 { "Плата по договору", HaveToPay },
                 { "Выплачено", Paid },

@@ -23,9 +23,9 @@ namespace SUARweb.Controllers
             {
                 RDlist.Add(new RentersDebts
                 {
-                    AgreementId = agreement.ID,
-                    Renter = agreement.Client.GetPassportAndFullname(),
-                    PayFrequency = agreement.Pay_Frequency.Frequency,
+                    Agreement = agreement,
+                    Renter = agreement.Client,
+                    PayFrequency = agreement.Pay_Frequency,
                     PaySum = agreement.PaySum,
                     HaveToPay = GetDateDifference(agreement) * agreement.PaySum,
                     Paid = agreement.Payments.Select(p => p.Sum).Sum(),
@@ -34,8 +34,8 @@ namespace SUARweb.Controllers
                 });
             }
 
-            if (!String.IsNullOrEmpty(renter)) RDlist = RDlist.Where(rd => rd.Renter.Contains(renter)).ToList();
-            if (agr != null) RDlist = RDlist.Where(rd => rd.AgreementId == agr).ToList();
+            if (!String.IsNullOrEmpty(renter)) RDlist = RDlist.Where(rd => rd.Renter.GetPassportAndFullname().Contains(renter)).ToList();
+            if (agr != null) RDlist = RDlist.Where(rd => rd.Agreement.ID == agr).ToList();
 
             DateTime fd, sd;
             bool fdOk = DateTime.TryParse(firstDate, out fd);
@@ -111,9 +111,9 @@ namespace SUARweb.Controllers
             {
                 RDlist.Add(new RentersDebts
                 {
-                    AgreementId = agreement.ID,
-                    Renter = agreement.Client.GetPassportAndFullname(),
-                    PayFrequency = agreement.Pay_Frequency.Frequency,
+                    Agreement = agreement,
+                    Renter = agreement.Client,
+                    PayFrequency = agreement.Pay_Frequency,
                     PaySum = agreement.PaySum,
                     HaveToPay = GetDateDifference(agreement) * agreement.PaySum,
                     Paid = agreement.Payments.Select(p => p.Sum).Sum(),

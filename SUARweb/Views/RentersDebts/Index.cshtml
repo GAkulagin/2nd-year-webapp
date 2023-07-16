@@ -52,7 +52,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AgreementId)
+            @Html.DisplayNameFor(model => model.Agreement)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Renter)
@@ -85,10 +85,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AgreementId)
+                @Html.DisplayFor(modelItem => item.Agreement.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Renter)
+                @item.Renter.GetPassportAndFullname()
             </td>
            <td>
                 @item.StartDate.ToString("d")
@@ -97,7 +97,7 @@
                 @item.EndDate.ToString("d")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PayFrequency)
+                @Html.DisplayFor(modelItem => item.PayFrequency.Frequency)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PaySum)

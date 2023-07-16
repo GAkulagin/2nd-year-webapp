@@ -149,6 +149,7 @@
     <Compile Include="Models\Agreement.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgreementStatusCode.cs" />
     <Compile Include="Models\Agreement_Status.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RentalStatusCode.cs" />
     <Compile Include="Models\RentersDebts.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Models.tt</DependentUpon>
