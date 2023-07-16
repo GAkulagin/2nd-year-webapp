@@ -101,8 +101,7 @@
                 @Html.DisplayFor(modelItem => item.Pay_Frequency.Frequency)
             </td>
             <td>
-                <!--Если договор действует-->
-                @if (item.StatusId == 1)
+                @if (item.StatusId == SUARweb.Models.AgreementStatusCode.Active)
                 {
                     <input type="button" value="Изменить статус" onclick="window.location.href='@Url.Action("SetStatus", "Agreements", new { id = item.ID })';" />
                     <p></p>

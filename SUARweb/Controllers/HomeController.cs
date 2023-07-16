@@ -11,12 +11,12 @@ namespace SUARweb.Controllers
 
         public ActionResult Index()
         {
-            var agreements = db.Agreements.Where(a => a.StatusId == 1); // действующие договоры
+            var agreements = db.Agreements.Where(a => a.StatusId == AgreementStatusCode.Active);
 
             foreach(var a in agreements)
-            {
-                if (a.EndDate.Date <= DateTime.Today) a.StatusId = 2; // меняем на истек
-            }
+                if (a.EndDate.Date <= DateTime.Today)
+                    a.StatusId = AgreementStatusCode.Expired;
+
             db.SaveChanges();
 
             return View();

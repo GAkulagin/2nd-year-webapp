@@ -54,8 +54,7 @@ namespace SUARweb.Controllers
                 Text = c.PassportID + " " + c.Fullname,
                 Value = c.PassportID
             });
-            var statuses = db.RentalStatus.ToList();
-            statuses.RemoveAt(1); // убрать "Сдается"
+            var statuses = db.RentalStatus.Where(rs => rs.ID != RentalStatusCode.Occupied);
 
             ViewBag.BalconyTypeId = new SelectList(db.BalconyType, "ID", "BalconyType");
             ViewBag.BuildingId = new SelectList(adresses, "Value", "Text");
@@ -92,8 +91,7 @@ namespace SUARweb.Controllers
                 Text = c.PassportID + " " + c.Fullname,
                 Value = c.PassportID
             });
-            var statuses = db.RentalStatus.ToList();
-            statuses.RemoveAt(1); // убрать "Сдается"
+            var statuses = db.RentalStatus.Where(rs => rs.ID != RentalStatusCode.Occupied);
 
             ViewBag.BalconyTypeId = new SelectList(db.BalconyType, "ID", "BalconyType", apartment.BalconyTypeId);
             ViewBag.BuildingId = new SelectList(adresses, "Value", "Text", adresses.Select(a => a.Value).Where(v => v == apartment.BuildingId).First());
@@ -133,8 +131,10 @@ namespace SUARweb.Controllers
             });
 
             List<Rental_Status> statuses = new List<Rental_Status>();
-            if (apartment.Rental_Status.ID == 2) statuses.Add(db.RentalStatus.Find(2));
-            else statuses.AddRange(db.RentalStatus.Where(rs => rs.ID != 2));
+            if (apartment.Rental_Status.ID == RentalStatusCode.Occupied) 
+                statuses.Add(db.RentalStatus.Where(rs => rs.ID == RentalStatusCode.Occupied).Single());
+
+            else statuses.AddRange(db.RentalStatus.Where(rs => rs.ID != RentalStatusCode.Occupied));
 
             ViewBag.BalconyTypeId = new SelectList(db.BalconyType, "ID", "BalconyType", apartment.BalconyTypeId);
             ViewBag.BuildingId = new SelectList(adresses, "Value", "Text", adresses.Select(a => a.Value).Where(v => v == apartment.BuildingId).First());

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -52,7 +51,7 @@ namespace SUARweb.Controllers
         // GET: Agreements/Create
         public ActionResult Create()
         {
-            var apartments = db.Apartments.Where(a => a.StatusId == 1).Select(a => new
+            var apartments = db.Apartments.Where(a => a.StatusId == RentalStatusCode.Vacant).Select(a => new
             {
                 Text = a.Building.District.Settlement.Subject.Name + " ," +
                        a.Building.District.Settlement.Settlement_Type.Type + " " +
@@ -79,7 +78,7 @@ namespace SUARweb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,StartDate,EndDate,PayFrequencyId,PaySum,RenterId,ApartmentId")] Agreement agreement)
         {
-            agreement.StatusId = 1;
+            agreement.StatusId = AgreementStatusCode.Active;
 
             if (ModelState.IsValid)
             {
@@ -88,7 +87,7 @@ namespace SUARweb.Controllers
                 return RedirectToAction("Index");
             }
 
-            var apartments = db.Apartments.Where(a => a.StatusId == 1).Select(a => new
+            var apartments = db.Apartments.Where(a => a.StatusId == RentalStatusCode.Vacant).Select(a => new
             {
                 Text = a.Building.District.Settlement.Subject.Name + " ," +
                        a.Building.District.Settlement.Settlement_Type.Type + " " +
@@ -123,8 +122,7 @@ namespace SUARweb.Controllers
                 return HttpNotFound();
             }
 
-            var statuses = db.AgreementStatus.ToList();
-            statuses.RemoveAt(1);
+            var statuses = db.AgreementStatus.Where(rs => rs.ID != AgreementStatusCode.Expired);
             ViewBag.StatusId = new SelectList(statuses, "ID", "Status", agreement.StatusId);
 
             return View(agreement);
@@ -144,8 +142,7 @@ namespace SUARweb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var statuses = db.AgreementStatus.ToList();
-            statuses.RemoveAt(1);
+            var statuses = db.AgreementStatus.Where(rs => rs.ID != AgreementStatusCode.Expired);
             ViewBag.StatusId = new SelectList(statuses, "ID", "Status", agreement.StatusId);
 
             return View(agreement);
